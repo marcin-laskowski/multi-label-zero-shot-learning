@@ -3,6 +3,7 @@ from PIL import Image
 from torchvision import transforms
 import pickle
 from torchvision import models, transforms
+import torch.nn as nn
 
 
 class PythonPredictor:
