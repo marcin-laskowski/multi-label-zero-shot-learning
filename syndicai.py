@@ -8,7 +8,7 @@ import zipfile
 
 class PythonPredictor:
 
-    def __init__(self):
+    def __init__(self, config):
         """ Download pretrained model. """
         # Resnet101, paper uses 80 layer residual CNN.
         model = models.resnet101(pretrained=True)
