@@ -10,6 +10,7 @@ class PythonPredictor:
 
     def __init__(self, config):
         """ Download pretrained model. """
+        print(torch.__version__)
         # Resnet101, paper uses 80 layer residual CNN.
         model = models.resnet101(pretrained=True)
         num_ftrs = model.fc.in_features
@@ -29,7 +30,7 @@ class PythonPredictor:
         with open('word_space.pkl', 'rb') as f:
             all_classes_df = pickle.load(f)
         print("Vectors loaded")
-        
+
         self.classes = all_classes_df
         self.model = model
 
