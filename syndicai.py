@@ -17,7 +17,7 @@ class PythonPredictor:
         model.fc = nn.Linear(num_ftrs, 300)
         print("Model loaded")
         # load model
-        PATH = "./affectnet_mse_full_19.pt"
+        PATH = "affectnet_mse_full_19.pt"
         model.load_state_dict(torch.load(PATH))
         print("state_dict updated")
         # get vectors
