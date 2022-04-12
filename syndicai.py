@@ -15,11 +15,8 @@ class PythonPredictor:
         num_ftrs = model.fc.in_features
         # mpodify final layer
         model.fc = nn.Linear(num_ftrs, 300)
-        # extract file
-        with zipfile.ZipFile("affectnet_mse_full_19.pt.zip", 'r') as zip_ref:
-            zip_ref.extractall("extract")
         # load model
-        PATH = "./extract/affectnet_mse_full_19.pt"
+        PATH = "./affectnet_mse_full_19.pt"
         model.load_state_dict(torch.load(PATH))
         
         with open('./word_space.pkl', 'rb') as f:
