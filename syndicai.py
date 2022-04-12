@@ -16,19 +16,20 @@ class PythonPredictor:
         # mpodify final layer
         model.fc = nn.Linear(num_ftrs, 300)
         print("Model loaded")
+        
+        # load model
         state_dict = torch.hub.load_state_dict_from_url(
-            "https://www.googleapis.com/drive/v3/files/10c4gOh-BOF02Cu7FuXyEJGILYq6xK97n?alt=media&key=AIzaSyAzY7nf594k16gtOVrdFIKw66-7C3boBAc"
+            "https://www.googleapis.com/drive/v3/files/10c4gOh-BOF02Cu7FuXyEJGILYq6xK97n?alt=media&key=AIzaSyAzY7nf594k16gtOVrdFIKw66-7C3boBAc",
+            map_location=torch.device('cpu')
         )
         model.load_state_dict(state_dict)
-        print(state_dict)
-        # load model
-        # PATH = "affectnet_mse_full_19.pt"
-        # model.load_state_dict(torch.load(PATH))
         print("state_dict updated")
+
         # get vectors
-        with open('./word_space.pkl', 'rb') as f:
+        with open('word_space.pkl', 'rb') as f:
             all_classes_df = pickle.load(f)
         print("Vectors loaded")
+        
         self.classes = all_classes_df
         self.model = model
 
