@@ -2,21 +2,24 @@ import torch
 from PIL import Image 
 from torchvision import transforms
 import pickle
-from torchvision import models, transforms
+from torchvision import models
 import torch.nn as nn
-
+import zipfile
 
 class PythonPredictor:
 
-    def __init__(self, config):
+    def __init__(self):
         """ Download pretrained model. """
         # Resnet101, paper uses 80 layer residual CNN.
         model = models.resnet101(pretrained=True)
         num_ftrs = model.fc.in_features
         # mpodify final layer
         model.fc = nn.Linear(num_ftrs, 300)
+        # extract file
+        with zipfile.ZipFile("affectnet_mse_full_19.pt.zip", 'r') as zip_ref:
+            zip_ref.extractall("extract")
         # load model
-        PATH = "./affectnet_mse_full_19.pt"
+        PATH = "./extract/affectnet_mse_full_19.pt"
         model.load_state_dict(torch.load(PATH))
         
         with open('./word_space.pkl', 'rb') as f:
