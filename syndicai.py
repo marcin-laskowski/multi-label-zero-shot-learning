@@ -15,13 +15,15 @@ class PythonPredictor:
         num_ftrs = model.fc.in_features
         # mpodify final layer
         model.fc = nn.Linear(num_ftrs, 300)
+        print("Model loaded")
         # load model
         PATH = "./affectnet_mse_full_19.pt"
         model.load_state_dict(torch.load(PATH))
-        
+        print("state_dict updated")
+        # get vectors
         with open('./word_space.pkl', 'rb') as f:
             all_classes_df = pickle.load(f)
-
+        print("Vectors loaded")
         self.classes = all_classes_df
         self.model = model
 
